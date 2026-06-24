@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { PRODUCTS_DATA } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { ChevronRight, ChevronLeft } from 'lucide-react';
+import { motion } from 'motion/react';
 
 const ProductSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -68,7 +69,7 @@ const ProductSection = () => {
             </div>
 
             <div
-              className='t relative w-[56%] hover:cursor-pointer sm:w-[52%] md:w-[48%] lg:w-[45%]'
+              className='group t relative z-0 w-[56%] hover:cursor-pointer sm:w-[52%] md:w-[48%] lg:w-[45%]'
               onMouseEnter={() =>
                 setTooltip((prev) => ({ ...prev, visible: true }))
               }
@@ -77,14 +78,22 @@ const ProductSection = () => {
               }
               onMouseMove={(e) => updateMousePosition(e)}
             >
-              <Image
-                src={PRODUCTS_DATA[activeIndex].imageUrl}
-                alt={PRODUCTS_DATA[activeIndex].name}
-                width={2500}
-                height={2500}
-                className='object-contain'
-                priority
-              />
+              <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(249,115,22,0.25)_0%,transparent_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                <Image
+                  src={PRODUCTS_DATA[activeIndex].imageUrl}
+                  alt={PRODUCTS_DATA[activeIndex].name}
+                  width={2500}
+                  height={2500}
+                  className='object-contain'
+                  priority
+                />
+              </motion.div>
 
               {tooltip.visible && (
                 <div
