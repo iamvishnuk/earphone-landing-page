@@ -35,7 +35,13 @@ const ProductSection = () => {
 
   return (
     <section className='max-w-10xl flex w-full flex-col items-center px-4 pt-8 pb-20 sm:px-5 md:pt-12'>
-      <div className='mt-10 mb-6 sm:mt-16 sm:mb-10 md:mt-20 md:mb-10'>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className='mt-10 mb-6 sm:mt-16 sm:mb-10 md:mt-20 md:mb-10'
+      >
         <p className='mx-auto max-w-xl text-center text-xs leading-6 font-medium text-[#555555] uppercase sm:max-w-2xl sm:text-sm md:max-w-3xl md:text-base'>
           Lorem ipsum linus Karlsson Alexandra Sjöberg i Signe Björk, Michael
           Jonsson.{' '}
@@ -44,9 +50,15 @@ const ProductSection = () => {
             Adam Sundberg Viola Nyberg.
           </span>
         </p>
-      </div>
+      </motion.div>
 
-      <div className='relative mt-6 flex w-full flex-col items-center sm:mt-10 md:mt-12'>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className='relative mt-6 flex w-full flex-col items-center sm:mt-10 md:mt-12'
+      >
         <div className='pointer-events-none absolute top-0 left-0 flex w-full justify-center overflow-hidden select-none'>
           <h2 className='font-inter xs:text-[5rem] text-[3rem] leading-none font-extrabold whitespace-nowrap text-[#f2f2f2] uppercase sm:text-[8rem] md:text-[11rem]'>
             Our Range
@@ -125,8 +137,14 @@ const ProductSection = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className='relative flex flex-col items-center pt-10'>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className='relative flex flex-col items-center pt-10'
+      >
         <div className='flex items-center'>
           <h3 className='font-robooto text-4xl font-medium uppercase'>
             {PRODUCTS_DATA[getSlideIndex(activeIndex)].name}
@@ -170,7 +188,7 @@ const ProductSection = () => {
             <ChevronRight className='text-orange-500' />
           </button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
