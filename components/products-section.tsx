@@ -40,15 +40,15 @@ const ProductSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className='mt-10 mb-6 sm:mt-16 sm:mb-10 md:mt-20 md:mb-10'
+        className='mt-5 mb-6 sm:mt-10 sm:mb-10 md:mt-15 md:mb-10 lg:mt-20'
       >
-        <p className='mx-auto max-w-xl text-center text-xs leading-6 font-medium text-[#555555] uppercase sm:max-w-2xl sm:text-sm md:max-w-3xl md:text-base'>
+        <p className='mx-auto max-w-xl text-center text-xs leading-5 font-medium text-[#555555] uppercase sm:max-w-2xl sm:text-sm md:max-w-3xl md:text-base md:leading-6'>
           Lorem ipsum linus Karlsson Alexandra Sjöberg i Signe Björk, Michael
-          Jonsson.{' '}
-          <span className='hidden sm:inline'>
-            Viktor Blom Alexander Engström. Adam Gustavsson Astrid Lindgren.
-            Adam Sundberg Viola Nyberg.
-          </span>
+          Jonsson.
+          <br className='hidden md:block' />
+          Viktor Blom Alexander Engström. Adam Gustavsson Astrid Lindgren. Adam
+          <br className='hidden md:block' />
+          Sundberg Viola Nyberg.
         </p>
       </motion.div>
 
@@ -60,7 +60,7 @@ const ProductSection = () => {
         className='relative mt-6 flex w-full flex-col items-center sm:mt-10 md:mt-12'
       >
         <div className='pointer-events-none absolute top-0 left-0 flex w-full justify-center overflow-hidden select-none'>
-          <h2 className='font-inter xs:text-[5rem] text-[3rem] leading-none font-extrabold whitespace-nowrap text-[#f2f2f2] uppercase sm:text-[8rem] md:text-[11rem]'>
+          <h2 className='font-inter text-[15vw] leading-none font-extrabold whitespace-nowrap text-[#f2f2f2] uppercase lg:text-[12vw]'>
             Our Range
           </h2>
         </div>
@@ -146,12 +146,12 @@ const ProductSection = () => {
         className='relative flex flex-col items-center pt-10'
       >
         <div className='flex items-center'>
-          <h3 className='font-robooto text-4xl font-medium uppercase'>
+          <h3 className='font-saira text-4xl font-medium uppercase'>
             {PRODUCTS_DATA[getSlideIndex(activeIndex)].name}
           </h3>
           <svg
             className={cn(
-              'ml-2 size-12 transition-all duration-500',
+              'ml-2 hidden size-12 transition-all duration-500 md:block',
               tooltip.visible ? 'opacity-100' : 'opacity-0'
             )}
             viewBox='0 0 24 24'
