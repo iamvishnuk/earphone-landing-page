@@ -19,6 +19,11 @@ export function PresetsPanel({
     return 'Custom equalizer profile. Tailor your listening experience.';
   };
 
+  const playSound = () => {
+    const audio = new Audio('/audio/click-01.mp3');
+    audio.play();
+  };
+
   return (
     <div className='flex grow flex-col justify-between border border-neutral-800/80 bg-neutral-900/10 p-5 sm:p-6'>
       <div>
@@ -35,7 +40,10 @@ export function PresetsPanel({
         {PRESETS.map((preset) => (
           <button
             key={preset.name}
-            onClick={() => onApplyPreset(preset)}
+            onClick={() => {
+              playSound();
+              onApplyPreset(preset);
+            }}
             className={`flex cursor-pointer flex-col items-start justify-between border p-3 text-left transition-all ${
               activePreset === preset.name
                 ? 'border-orange-500 bg-orange-500/10 text-white'

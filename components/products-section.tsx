@@ -33,6 +33,8 @@ const ProductSection = () => {
   const getSlideIndex = (offset: number) =>
     (activeIndex + offset + total) % total;
 
+  const visibleIndices = [getSlideIndex(-1), activeIndex, getSlideIndex(1)];
+
   return (
     <section className='max-w-10xl flex w-full flex-col items-center px-4 pt-8 pb-20 sm:px-5 md:pt-12'>
       <motion.div
@@ -67,74 +69,87 @@ const ProductSection = () => {
 
         <div className='relative mx-auto w-full max-w-7xl'>
           <div className='flex w-full items-center justify-between gap-2 px-2 pt-10 sm:gap-4 sm:px-4 md:gap-8 md:px-20 md:pt-[12%] lg:gap-16'>
-            <div
-              onClick={() => prev()}
-              className='w-[22%] hover:cursor-pointer sm:w-[18%] md:w-[15%]'
-            >
-              <Image
-                src={PRODUCTS_DATA[getSlideIndex(-1)].imageUrl}
-                alt={PRODUCTS_DATA[getSlideIndex(-1)].name}
-                width={2500}
-                height={2500}
-                className='scale-75 object-contain opacity-40 blur-[2px] transition-all duration-300 hover:opacity-100 hover:blur-none'
-              />
-            </div>
+            {visibleIndices.map((index, positionIndex) => {
+              const product = PRODUCTS_DATA[index];
+              const isCenter = positionIndex === 1;
 
-            <div
-              className='group t relative z-0 w-[56%] hover:cursor-pointer sm:w-[52%] md:w-[48%] lg:w-[45%]'
-              onMouseEnter={() =>
-                setTooltip((prev) => ({ ...prev, visible: true }))
-              }
-              onMouseLeave={() =>
-                setTooltip((prev) => ({ ...prev, visible: false }))
-              }
-              onMouseMove={(e) => updateMousePosition(e)}
-            >
-              <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(249,115,22,0.25)_0%,transparent_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100' />
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-              >
-                <Image
-                  src={PRODUCTS_DATA[activeIndex].imageUrl}
-                  alt={PRODUCTS_DATA[activeIndex].name}
-                  width={2500}
-                  height={2500}
-                  className='object-contain'
-                  priority
-                />
-              </motion.div>
-
-              {tooltip.visible && (
-                <div
-                  className='pointer-events-none absolute z-20 w-36 overflow-hidden rounded-full bg-orange-500 px-4 py-2 text-white'
-                  style={{
-                    left: tooltip.x + 20,
-                    top: tooltip.y + 10
+              return (
+                <motion.div
+                  layout
+                  key={product.name}
+                  animate={{
+                    scale: isCenter ? 1 : 0.75,
+                    opacity: isCenter ? 1 : 0.4
+                  }}
+                  whileHover={{
+                    opacity: 1
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 220,
+                    damping: 26,
+                    layout: { type: 'spring', stiffness: 220, damping: 26 }
+                  }}
+                  onClick={() => {
+                    if (positionIndex === 0) prev();
+                    if (positionIndex === 2) next();
+                  }}
+                  className={cn(
+                    'group relative cursor-pointer transition-[filter] duration-300 select-none',
+                    isCenter
+                      ? 'z-10 w-[56%] blur-none sm:w-[52%] md:w-[48%] lg:w-[45%]'
+                      : 'w-[22%] blur-[2px] hover:blur-none sm:w-[18%] md:w-[15%]'
+                  )}
+                  onMouseEnter={() => {
+                    if (isCenter) {
+                      setTooltip((prev) => ({ ...prev, visible: true }));
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setTooltip((prev) => ({ ...prev, visible: false }));
+                  }}
+                  onMouseMove={(e) => {
+                    if (isCenter) {
+                      updateMousePosition(e);
+                    }
                   }}
                 >
-                  <div className='animate-marquee flex w-max items-center text-xs font-semibold uppercase'>
-                    <span>Check this out. Check this out. Check this out.</span>
-                    <span>Check this out. Check this out. Check this out.</span>
-                  </div>
-                </div>
-              )}
-            </div>
+                  {isCenter && (
+                    <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(249,115,22,0.25)_0%,transparent_75%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+                  )}
 
-            <button
-              onClick={() => next()}
-              className='w-[22%] hover:cursor-pointer sm:w-[18%] md:w-[15%]'
-            >
-              <Image
-                src={PRODUCTS_DATA[getSlideIndex(1)].imageUrl}
-                alt={PRODUCTS_DATA[getSlideIndex(1)].name}
-                width={2500}
-                height={2500}
-                className='scale-75 object-contain opacity-40 blur-[2px] transition-all duration-300 hover:opacity-100 hover:blur-none'
-              />
-            </button>
+                  <div className='flex h-full w-full items-center justify-center'>
+                    <Image
+                      src={product.imageUrl}
+                      alt={product.name}
+                      width={2500}
+                      height={2500}
+                      className='pointer-events-none object-contain select-none'
+                      priority={isCenter}
+                    />
+                  </div>
+
+                  {isCenter && tooltip.visible && (
+                    <div
+                      className='pointer-events-none absolute z-20 w-36 overflow-hidden rounded-full bg-orange-500 px-4 py-2 text-white'
+                      style={{
+                        left: tooltip.x + 20,
+                        top: tooltip.y + 10
+                      }}
+                    >
+                      <div className='animate-marquee flex w-max items-center text-xs font-semibold uppercase'>
+                        <span>
+                          Check this out. Check this out. Check this out.
+                        </span>
+                        <span>
+                          Check this out. Check this out. Check this out.
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </motion.div>
@@ -147,7 +162,7 @@ const ProductSection = () => {
       >
         <div className='flex items-center'>
           <h3 className='font-saira text-4xl font-medium uppercase'>
-            {PRODUCTS_DATA[getSlideIndex(activeIndex)].name}
+            {PRODUCTS_DATA[activeIndex].name}
           </h3>
           <svg
             className={cn(
