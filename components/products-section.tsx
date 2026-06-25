@@ -40,7 +40,7 @@ const ProductSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className='mt-5 mb-6 sm:mt-10 sm:mb-10 md:mt-15 md:mb-10 lg:mt-20'
       >
@@ -57,7 +57,7 @@ const ProductSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-220px' }}
         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         className='relative mt-6 flex w-full flex-col items-center sm:mt-10 md:mt-12'
       >
@@ -156,7 +156,7 @@ const ProductSection = () => {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className='relative flex flex-col items-center pt-10'
       >

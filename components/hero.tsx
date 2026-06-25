@@ -48,7 +48,7 @@ const Hero = () => {
     <section className='max-w-9xl relative mx-auto mb-10 flex w-[97%] flex-col pt-2 md:pt-5'>
       <div
         ref={containerRef}
-        className='group relative h-[460px] w-full overflow-hidden rounded-[25px] bg-black [corner-shape:bevel] sm:h-[480px] md:h-[560px] lg:h-[648px]'
+        className='group relative h-[460px] w-full overflow-hidden rounded-[25px] bg-black [corner-shape:bevel] sm:h-[480px] md:h-[520px]'
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
 
@@ -85,7 +85,7 @@ const Hero = () => {
 
         {/* Heading */}
         <div className='absolute inset-0 flex items-center pl-[6%] sm:pl-[8%] md:pl-[10%] lg:pl-[20%]'>
-          <h2 className='text-center text-5xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-9xl'>
+          <h2 className='text-center text-5xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-9xl'>
             MODEL <br /> XRS
           </h2>
         </div>
@@ -109,10 +109,10 @@ const Hero = () => {
       </div>
 
       {/* Hero earphone image overlay */}
-      <div className='pointer-events-none absolute inset-0 z-10 flex w-full justify-center'>
-        <div className='w-[80%] sm:w-[75%] md:w-[70%] lg:w-full'>
+      <div className='pointer-events-none absolute inset-0 z-10 flex h-[460px] w-full justify-center sm:h-[480px] md:h-[520px] lg:top-10'>
+        <div className='absolute inset-0 h-full w-full'>
           <motion.div
-            className='relative w-fit transition-transform'
+            className='absolute h-full w-full transition-transform'
             style={{ x: xSpring, y: ySpring }}
           >
             <Image
@@ -120,7 +120,7 @@ const Hero = () => {
               alt='Model Earphone'
               width={1143}
               height={803}
-              className='object-contain'
+              className='absolute top-[20%] left-[60%] h-[45%] w-auto max-w-none -translate-x-[60%] -translate-y-[48%] object-contain md:top-[35%] md:left-1/2 md:h-[75%] lg:top-1/2 lg:h-[120%]'
             />
           </motion.div>
         </div>
